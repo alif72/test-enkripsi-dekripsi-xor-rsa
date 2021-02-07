@@ -56,7 +56,8 @@ class XORCipher
     public function ascii2text($ascii)
     {
         $text = "";
-
+        // var_dump($ascii);
+        // die;
         foreach ($ascii as $char)
             $text .= chr($char);
 

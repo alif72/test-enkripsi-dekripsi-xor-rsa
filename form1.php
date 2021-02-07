@@ -49,7 +49,7 @@ $XORCipher = new XORCipher;
                 <button type="submit" name="enc1">Enkripsi XOR</button>
             </td>
         </tr>
-        <?php if (isset($_POST['enc1']) || isset($_POST['enc2'])) : ?>
+        <?php if (isset($_POST['enc1']) || isset($_POST['enc2']) || isset($_POST['enc3']) || isset($_POST['enc4'])) : ?>
             <?php
             $enc1 = $XORCipher->cipher($_POST['plaintext'], $_POST['keyxor'])
             ?>
@@ -84,11 +84,12 @@ $XORCipher = new XORCipher;
                 </td>
             </tr>
         <?php endif; ?>
-        <?php if (isset($_POST['enc2']) || isset($_POST['enc3'])) :
+        <?php if (isset($_POST['enc2']) || isset($_POST['enc3']) || isset($_POST['enc4'])) :
             $enc2 = $XORCipher->text2ascii($enc1);
             $res = '';
             foreach ($enc2 as $text2Ascii) {
-                $tmp = pow($text2Ascii, $_POST['kunci_E']) % $_POST['kunci_N'];
+                $tmp = bcpow($text2Ascii, $_POST['kunci_E']);
+                $tmp = bcmod($tmp, $_POST['kunci_N']);
                 $res .=  $tmp . " ";
             }
             $ascii = [
@@ -98,11 +99,11 @@ $XORCipher = new XORCipher;
         ?>
             <tr>
                 <td>Hasil Enkripsi RSA (ASCII INT)</td>
-                <td><input type="text" value="<?= $ascii['number']; ?>"></td>
+                <td><input type="text" name="res_enc_rsa_num" value="<?= $ascii['number']; ?>"></td>
             </tr>
             <tr>
                 <td>Hasil Enkripsi RSA (ASCII CHAR)</td>
-                <td><input type="text" value="<?= $ascii['text']; ?>"></td>
+                <td><input type="text" name="res_enc_rsa_txt" value="<?= $ascii['text']; ?>"></td>
             </tr>
             <tr>
                 <th colspan="2">
@@ -122,12 +123,12 @@ $XORCipher = new XORCipher;
                     Kunci N
                 </td>
                 <td>
-                    <input type="text" name="kunci_N1" value="<?= isset($_POST['kunci_N1']) ? $_POST['kunci_N1'] : '' ?> ">
+                    <input type="text" name="kunci_N1" value="<?= isset($_POST['kunci_N1']) ? $_POST['kunci_N1'] : '' ?>">
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit" name="enc3">Dekripsi</button>
+                    <button type="submit" name="enc3">Dekripsi RSA</button>
                 </td>
             </tr>
         <?php endif; ?>
@@ -136,13 +137,13 @@ $XORCipher = new XORCipher;
             $res2 = '';
             foreach ($enc2 as $text2Ascii) {
                 $tmp = bcpow($text2Ascii, $_POST['kunci_D']);
-                $tmp1 = bcmod($tmp, $_POST['kunci_N1']);
+                $tmp1 = bcmod($tmp, trim($_POST['kunci_N1']));
                 $res2 .=  $tmp1 . " ";
+                $ascii = [
+                    'number' => $res2,
+                    'text' => $XORCipher->ascii2text(explode(' ', trim($res2)))
+                ];
             }
-            $ascii = [
-                'number' => $res2,
-                'text' => $XORCipher->ascii2text(explode(' ', trim($res2)))
-            ];
         ?>
             <tr>
                 <td>Hasil Dekripsi RSA (ASCII INT)</td>
@@ -167,12 +168,12 @@ $XORCipher = new XORCipher;
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit" name="enc4">Enkripsi XOR</button>
+                    <button type="submit" name="enc4">Dekripsi XOR</button>
                 </td>
             </tr>
         <?php endif; ?>
-        <?php if (isset($_POST['enc4']) || isset($_POST['enc5'])) : ?>
-            <?php $enc4 = $XORCipher->ascii2text($ascii['text'], $_POST['keyxor2']) ?>
+        <?php if (isset($_POST['enc4'])) : ?>
+            <?php $enc4 = $XORCipher->plaintext($ascii['text'], $_POST['keyxor2']) ?>
             <tr>
                 <td>Hasil Dekripsi XOR</td>
                 <td><input type="text" value="<?= $enc4; ?>"></td>
