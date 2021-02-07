@@ -106,6 +106,9 @@ $XORCipher = new XORCipher;
                 <td><input type="text" name="res_enc_rsa_txt" value="<?= $ascii['text']; ?>"></td>
             </tr>
             <tr>
+                <td><a href="generate.php?enc=<?= $ascii['text'] ?>&num=<?= $ascii['number'] ?>">Download file.ods</a></td>
+            </tr>
+            <tr>
                 <th colspan="2">
                     Dekripsi RSA
                 </th>
