@@ -1,6 +1,5 @@
 <?php
 require_once 'spout/src/Spout/Autoloader/autoload.php';
-// $filePath = 'res/sample.ods';
 $filename = time();
 
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;

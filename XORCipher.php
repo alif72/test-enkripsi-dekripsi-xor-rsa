@@ -7,14 +7,10 @@ class XORCipher
     {
         $key = (int) $key;
         $plaintext = $this->text2ascii($plaintext);
-
         $input_size = count($plaintext);
-
         $cipher = "";
-
         for ($i = 0; $i < $input_size; $i++)
             $cipher .= chr($plaintext[$i] ^ $key);
-
         return $cipher;
     }
 
@@ -56,8 +52,6 @@ class XORCipher
     public function ascii2text($ascii)
     {
         $text = "";
-        // var_dump($ascii);
-        // die;
         foreach ($ascii as $char)
             $text .= chr($char);
 

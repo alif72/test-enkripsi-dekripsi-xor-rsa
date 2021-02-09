@@ -142,11 +142,11 @@ $XORCipher = new XORCipher;
                 $tmp = bcpow($text2Ascii, $_POST['kunci_D']);
                 $tmp1 = bcmod($tmp, trim($_POST['kunci_N1']));
                 $res2 .=  $tmp1 . " ";
-                $ascii = [
-                    'number' => $res2,
-                    'text' => $XORCipher->ascii2text(explode(' ', trim($res2)))
-                ];
             }
+            $ascii = [
+                'number' => $res2,
+                'text' => $XORCipher->ascii2text(explode(' ', trim($res2)))
+            ];
         ?>
             <tr>
                 <td>Hasil Dekripsi RSA (ASCII INT)</td>
