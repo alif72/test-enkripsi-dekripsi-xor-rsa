@@ -12,6 +12,7 @@
     <?php
     if (isset($_POST['enkrip_ods'])) {
         require_once 'proses_upload.php';
+        die;
     }
     ?>
     <form action="" method="POST" enctype="multipart/form-data">
