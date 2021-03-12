@@ -10,8 +10,8 @@
 
 <body>
     <?php
-    if (isset($_POST['enkrip_ods'])) {
-        require_once 'proses_upload.php';
+    if (isset($_POST['decrypt_ods'])) {
+        require_once 'proses_upload2.php';
     }
     ?>
     <form action="" method="POST" enctype="multipart/form-data">
@@ -25,8 +25,8 @@
                 <td><input type="text" name="keyXOR"></td>
             </tr>
             <tr>
-                <th>Key E RSA</th>
-                <td><input type="text" name="keyE"></td>
+                <th>Key D RSA</th>
+                <td><input type="text" name="keyD"></td>
             </tr>
             <tr>
                 <th>Key N RSA</th>
@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit" name="enkrip_ods">Enkrip</button>
+                    <button type="submit" name="decrypt_ods">Dekrip</button>
                 </td>
             </tr>
 
