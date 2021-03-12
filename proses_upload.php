@@ -11,6 +11,8 @@ use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Box\Spout\Common\Entity\Style\Color;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+date_default_timezone_set('Asia/Jakarta');
+
 
 /**
  * Membaca File ODS Yang Di Upload dan meng enkripsi isi dari tiap2 cell
@@ -41,7 +43,7 @@ $reader->close();
  * berdasarkan data dari file yang diupload dan telah dienkripsi
  */
 $writer = WriterEntityFactory::createODSWriter();
-$filename = time();
+$filename = 'enkripsi-'.date("d-m-Y").'-'.date("H:i:s").'.ods';
 $writer->openToBrowser($filename);
 $rowsData = [];
 foreach ($dataFromFile as $data) {
